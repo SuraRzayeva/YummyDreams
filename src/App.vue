@@ -1,30 +1,98 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  <the-navbar />
+  <div class="circle circle-yellow"></div>
+  <div class="circle circle-black"></div>
+  <div class="circle circle-green"></div>
   <router-view />
 </template>
 
+<script>
+import TheNavbar from './components/bodies/TheNavbar.vue'
+import { gsap } from 'gsap'
+
+export default {
+  name: 'App',
+  components: {
+    TheNavbar,
+  },
+  methods: {
+    startAnimations() {
+      console.log('animations started')
+      gsap.to('.circle-black', { duration: 1, opacity: 0.6, x: 0, ease: 'circ', delay: 2 })
+      gsap.to('.circle-yellow', { duration: 1, opacity: 0.6, x: 0, ease: 'circ', delay: 2 })
+      gsap.to('.circle-green', { duration: 1, opacity: 0.6, x: 0, ease: 'circ', delay: 2 })
+    },
+  },
+  mounted() {
+    this.startAnimations()
+  },
+}
+</script>
+
 <style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+}
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  position: relative;
+  overflow: hidden;
+  max-width: 1620px;
+  margin: auto;
 }
 
-#nav {
-  padding: 30px;
+.credit {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.credit a {
+  font-weight: 600;
+  color: #222;
+  text-decoration: none;
+}
+.circle {
+  border-radius: 50%;
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.circle-yellow {
+  width: 550px;
+  height: 550px;
+  left: -5%;
+  top: 35%;
+  background: yellow;
+  transform: translateX(-100%);
+}
+
+.circle-black {
+  background: black;
+  width: 250px;
+  height: 250px;
+  right: 2%;
+  top: 32%;
+  transform: translateX(100%);
+}
+
+.circle-green {
+  background: #3baa00;
+  width: 700px;
+  height: 700px;
+  right: -10%;
+  bottom: -10%;
+  transform: translateX(100%);
 }
 </style>
